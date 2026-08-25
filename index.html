@@ -785,7 +785,8 @@
 
         transform: translateY(0) scale(1);
 
-        max-height: 800px;
+        /* DIPERBAIKI: Kapasitas max-height dibesarkan agar tidak memotong teks panjang */
+        max-height: 2000px;
       }
 
       .letter h2 {
@@ -878,35 +879,23 @@
           transform: scale(0.85);
         }
         .cake-heart {
-        position: absolute;
-        color: white;
-        font-size: 28px;
-        z-index: 15;
-
-      }
-      .ch1 {
-
-        left: 45px;
-
-        top: 65px;
-
-      }
-      .ch2 {
-
-        left: 150px;
-
-        top: 90px;
-
-      }
-      .ch3 {
-
-        right: 45px;
-
-        top: 65px;
-
-      }
-
-
+          position: absolute;
+          color: white;
+          font-size: 28px;
+          z-index: 15;
+        }
+        .ch1 {
+          left: 45px;
+          top: 65px;
+        }
+        .ch2 {
+          left: 150px;
+          top: 90px;
+        }
+        .ch3 {
+          right: 45px;
+          top: 65px;
+        }
       }
     </style>
   </head>
@@ -948,11 +937,7 @@
 
               <span class="cake-heart ch1">🫧</span>
 
-
-
               <span class="cake-heart ch2">🫧</span>
-
-
 
               <span class="cake-heart ch3">🫧</span>
             </div>
@@ -1056,12 +1041,18 @@
         letter.classList.toggle("show");
 
         if (letter.classList.contains("show")) {
+          // DIPERBAIKI: Setelah animasi selesai, bebaskan max-height agar teks panjang fleksibel 100%
           setTimeout(function () {
+            if (letter.classList.contains("show")) {
+              letter.style.maxHeight = "none";
+            }
             letter.scrollIntoView({
               behavior: "smooth",
               block: "center",
             });
-          }, 500);
+          }, 1000);
+        } else {
+          letter.style.maxHeight = "";
         }
       });
 
